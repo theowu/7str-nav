@@ -3,14 +3,11 @@ title: "七弦万事屋藏宝图"
 ---
 
 <style>
-/* 隐藏PaperMod原生头部，消除重复标题 */
-header.site-header,
-#site-header,
-.header {
-  display: none !important;
-}
+body { padding-top: 0 !important; }
+.main, .post, .page { padding-top: 0 !important; }
 
-/* 头部容器：整行居中，和grid对齐宽度 */
+header.site-header, #site-header, .header { display: none !important; }
+
 .header-wrap {
   display: flex;
   justify-content: center;
@@ -18,50 +15,33 @@ header.site-header,
   gap: 1rem;
   width: 100%;
   max-width: 1200px;
-  margin: 0.4rem auto 0.8rem;
+  margin: 0.2rem auto 0.5rem;
   flex-wrap: wrap;
   padding: 0 8px;
   box-sizing: border-box;
 }
-.site-title-text {
-  font-size: 1.8rem;
-  font-weight: bold;
-}
-.theme-toggle-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-.home-link-btn a {
-  font-size: 1.1rem;
-}
+.site-title-text { font-size: 1.8rem; font-weight: bold; }
+.theme-toggle-btn { background: transparent; border: none; font-size: 1.3rem; cursor: pointer; }
+.home-link-btn a { font-size: 1.1rem; }
 
-/* 板块容器：和搜索框同宽对齐 */
 .section-block {
-  margin: 1.2rem auto;
+  margin: 0.8rem auto;
   text-align: center;
   max-width: 1200px;
   padding: 0 8px;
   box-sizing: border-box;
 }
-.section-title {
-  font-size: 1.1rem;
-  margin-bottom: 0.6rem;
-}
+.section-title { font-size: 1.1rem; margin-bottom: 0.4rem; }
 
-/* 桌面端：一行固定5列，卡片自动伸缩填充 */
 .section-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  justify-content: center;
   gap: 12px;
 }
 
-/* 卡片：修复文字溢出 */
 .grid-card {
   width: 100%;
-  height: 90px;
+  height: 80px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -73,24 +53,23 @@ header.site-header,
   transition: all 0.15s ease;
   user-select: none;
   overflow: hidden;
-  padding-top: 8px;
+  padding-top: 6px;
 }
 .grid-card:active { cursor: grabbing; }
 .grid-card:hover { background: var(--border); }
-.grid-card-icon { font-size: 1.5rem; margin-bottom: 6px; margin-top: 4px; line-height: 1; }
+.grid-card-icon { font-size: 1.4rem; margin-bottom: 3px; line-height: 1; }
 .grid-card-name { font-size: 0.85rem; text-align: center; white-space: nowrap; }
 
-/* 搜索框：和grid对齐宽度 */
 .home-search-wrap {
   width: 100%;
   max-width: 1200px;
-  margin: 0.4rem auto 1.2rem;
+  margin: 0.3rem auto 0.6rem;
   padding: 0 8px;
   box-sizing: border-box;
 }
 #home-search-input {
   width: 100%;
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-radius: 12px;
   border: 1.5px solid var(--border);
   background: var(--tertiary);
@@ -99,30 +78,16 @@ header.site-header,
   outline: none;
   box-sizing: border-box;
 }
-#home-search-input:focus {
-  border-color: var(--primary);
-}
-.no-match-tip {
-  text-align: center;
-  margin-top: 0.6rem;
-  opacity: 0.7;
-  display: none;
-}
+.no-match-tip { text-align: center; margin-top: 0.4rem; opacity: 0.7; display: none; }
 
-/* 移动端：一行5张卡片 */
 @media (max-width: 768px) {
-  .section-grid {
-    grid-template-columns: repeat(5, 1fr);
-    padding: 0 8px;
-    gap: 8px;
-  }
-  .grid-card {
-    width: 100%;
-    height: 80px;
-  }
+  .section-grid { grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .grid-card { height: 68px; }
   .site-title-text { font-size: 1.3rem; }
-  .grid-card-icon { font-size: 1.2rem; margin-bottom: 5px; }
-  .grid-card-name { font-size: 0.65rem; white-space: nowrap; }
+  .grid-card-icon { font-size: 1.15rem; margin-bottom: 2px; }
+  .grid-card-name { font-size: 0.63rem; white-space: nowrap; }
+  .header-wrap { gap: 0.6rem; margin: 0.15rem auto 0.3rem; }
+  .home-link-btn a { font-size: 0.95rem; }
 }
 </style>
 
@@ -137,7 +102,6 @@ header.site-header,
   <div class="no-match-tip" id="no-result">未找到匹配栏目</div>
 </div>
 
-<!-- 娱乐专栏 -->
 <div class="section-block">
   <div class="section-title">🎮 娱乐专栏</div>
   <div class="section-grid" id="group-ent">
@@ -160,7 +124,6 @@ header.site-header,
   </div>
 </div>
 
-<!-- 学习空间 -->
 <div class="section-block">
   <div class="section-title">📚 学习空间</div>
   <div class="section-grid" id="group-study">
@@ -187,7 +150,6 @@ header.site-header,
   </div>
 </div>
 
-<!-- 魔法工具 -->
 <div class="section-block">
   <div class="section-title">🔧 魔法工具</div>
   <div class="section-grid" id="group-tool">
@@ -206,18 +168,10 @@ header.site-header,
   </div>
 </div>
 
-<p style="text-align:center; margin-top:2rem; opacity:0.6; font-size:0.85rem;">© 2026 七弦万事屋藏宝图</p>
+<p style="text-align:center; margin-top:0.8rem; opacity:0.5; font-size:0.78rem;">© 2026 七弦万事屋藏宝图</p>
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
-function toggleTheme() {
-  const t = document.getElementById("dark-mode-toggle");
-  if (t) { t.click(); return; }
-  const html = document.documentElement;
-  html.classList.toggle("dark");
-  localStorage.setItem("theme", html.classList.contains("dark") ? "dark" : "light");
-}
-
 const groups = ["group-ent", "group-study", "group-tool"];
 groups.forEach(function(gid) {
   const el = document.getElementById(gid);
