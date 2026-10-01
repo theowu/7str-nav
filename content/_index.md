@@ -53,6 +53,7 @@ header.site-header, #site-header, .header { display: none !important; }
   transition: all 0.15s ease;
   user-select: none;
   overflow: hidden;
+  touch-action: none;
   padding-top: 6px;
 }
 .grid-card:active { cursor: grabbing; }
@@ -187,10 +188,12 @@ groups.forEach(function(gid) {
     el.appendChild(frag);
   }
   new Sortable(el, {
-    animation: 150,
-    delay: 200,
-    touchStartThreshold: 5,
+    animation: 200,
+    delay: 250,
+    touchStartThreshold: 3,
     forceFallback: true,
+    fallbackTolerance: 3,
+    preventOnFilter: false,
     fallbackOnBody: true,
     ghostClass: "sort-ghost",
     onEnd: function() {
