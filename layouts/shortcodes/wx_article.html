@@ -1,0 +1,10 @@
+{{/* 公众号文章跳转卡片短代码
+   用法：{{< wx_article url="https://mp.weixin.qq.com/s/xxxxx" title="《枫叶城》指弹谱" difficulty="★★★" >}}
+*/}}
+<a class="sheet-card" href="{{ .Get "url" }}" target="_blank" rel="noopener">
+  <div class="sheet-title">📄 {{ .Get "title" }}</div>
+  <div class="sheet-meta">
+    {{ with .Get "difficulty" }}<span class="sheet-difficulty">难度 {{ . }}</span>{{ end }}
+    {{ with .Get "date" }}<span>更新：{{ . }}</span>{{ end }}
+  </div>
+</a>

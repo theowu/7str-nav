@@ -1,0 +1,7 @@
+{{/* 付费提示框短代码
+   用法：{{< paywall_notice title="完整版需购买" >}}正文内容{{< /paywall_notice >}}
+*/}}
+<div class="paywall-notice">
+  <div class="notice-title">🔒 {{ .Get "title" | default "付费内容" }}</div>
+  <div>{{ .Inner | markdownify }}</div>
+</div>

@@ -1,0 +1,150 @@
+/* ========== 移动端优化 ========== */
+
+/* 防止横向滚动 */
+body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 图片自适应 */
+.responsive-img img,
+.post-content img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* 代码块和表格横向滚动 */
+pre, table {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 视频容器自适应（B站嵌入用） */
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ========== 曲谱卡片样式 ========== */
+.sheet-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: box-shadow 0.2s, transform 0.15s;
+  background: var(--entry);
+}
+.sheet-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.sheet-card .sheet-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.sheet-card .sheet-meta {
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+.sheet-card .sheet-difficulty {
+  display: inline-block;
+  background: var(--tertiary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-right: 8px;
+}
+
+/* ========== 购买按钮 ========== */
+.buy-button {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff !important;
+  padding: 14px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none !important;
+  margin: 1.5rem 0;
+  transition: opacity 0.2s;
+}
+.buy-button:hover {
+  opacity: 0.9;
+}
+.buy-button-secondary {
+  background: transparent;
+  border: 1.5px solid var(--primary);
+  color: var(--primary) !important;
+}
+
+/* 付费提示框 */
+.paywall-notice {
+  background: var(--tertiary);
+  border-left: 4px solid #667eea;
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+}
+.paywall-notice .notice-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* ========== 列表页优化 ========== */
+.post-entry {
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  transition: box-shadow 0.2s;
+}
+.post-entry:hover {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.post-entry .entry-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* 难度标签 */
+.tag-difficulty {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.tag-easy { background: #e8f5e9; color: #2e7d32; }
+.tag-medium { background: #fff3e0; color: #e65100; }
+.tag-hard { background: #ffebee; color: #c62828; }
+
+/* 手机端字体微调 */
+@media (max-width: 768px) {
+  .post-content {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+  .sheet-card {
+    padding: 0.875rem 1rem;
+  }
+}

@@ -1,0 +1,9 @@
+{{/* B站视频嵌入短代码
+   用法：{{< bilibili BV1xx411c7mD >}}
+*/}}
+{{ $bvid := .Get 0 }}
+<div class="video-container">
+  <iframe src="https://player.bilibili.com/player.html?bvid={{ $bvid }}&page=1&high_quality=1&danmaku=0"
+    scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true">
+  </iframe>
+</div>

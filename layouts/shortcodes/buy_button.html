@@ -1,0 +1,6 @@
+{{/* 购买按钮短代码
+   用法：{{< buy_button url="https://mbd.pub/o/xxx" text="购买完整版PDF" >}}
+*/}}
+<a class="buy-button" href="{{ .Get "url" }}" target="_blank" rel="noopener">
+  {{ .Get "text" | default "👉 点击购买完整版" }}
+</a>
