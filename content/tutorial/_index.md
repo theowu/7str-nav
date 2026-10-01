@@ -1,7 +1,37 @@
 ---
 title: "魔法教程"
 description: "各类创作教程分享"
+disableHeader: true
 ---
+
+<style>
+.subpage-header-wrap {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  margin: 0.4rem 0 0.8rem;
+}
+.subpage-title {
+  grid-column: 2;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-align: center;
+}
+.subpage-home-btn {
+  grid-column: 3;
+  justify-self: end;
+}
+.subpage-home-btn a {
+  font-size: 1.1rem;
+}
+</style>
+
+<div class="subpage-header-wrap">
+  <div class="subpage-title">魔法教程</div>
+  <div class="subpage-home-btn"><a href="/">🏠首页</a></div>
+</div>
+
 
 {{< inpage-search placeholder="🔍 输入教程名搜索..." listId="article-list" resultId="no-result" >}}
 

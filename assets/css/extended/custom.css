@@ -17,59 +17,18 @@ pre, table {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ========== 头部强制居中（覆盖PaperMod） ========== */
-.header,
-.site-header,
-#site-header {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-}
-.header .logo,
-.site-header .site-title,
-#site-header .logo {
-  font-size: 1.3rem !important;
-  font-weight: 700 !important;
-  margin-bottom: 0.5rem !important;
-  text-align: center !important;
-}
-.header ul,
-.header .site-nav,
-#menu,
-#header-menu {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-  padding: 0 !important;
-  margin: 0.25rem 0 !important;
-  list-style: none !important;
-}
-.header ul li,
-.header .site-nav li,
-#menu li {
-  margin: 0 0.35rem !important;
-  display: inline-block !important;
-}
-/* 主题切换按钮居中 */
-#dark-mode-toggle,
-.header .theme-toggle,
-.headericons {
-  margin: 0.5rem auto 0 !important;
-  display: block !important;
-  text-align: center !important;
-}
-/* 隐藏PaperMod自带搜索 */
-#search,
-.search-button,
-.toggle.search,
-.headericons .search {
+/* ========== 彻底隐藏所有页面PaperMod原生顶部栏 ========== */
+header.site-header,
+#site-header,
+.header {
   display: none !important;
 }
-.breadcrumbs {
-  display: none !important;
+
+/* ========== 子页面标题居中紧凑 ========== */
+.post-title,
+.entry-header h1,
+.single-title {
+  display: none !important; /* 用自定义头部替代，隐藏Hugo自动生成的重复标题 */
 }
 
 /* ========== 视频容器 ========== */
@@ -167,7 +126,27 @@ pre, table {
   line-height: 1.3;
 }
 
-/* ========== 搜索框（纯输入框，无多余背景） ========== */
+/* ========== 子页面统一样式 ========== */
+/* 子页面标题居中、紧凑间距 */
+.post-title,
+.entry-header h1,
+.single-title {
+  text-align: center !important;
+  font-size: 1.3rem !important;
+  margin: 0.5rem 0 0.75rem !important;
+}
+
+/* 子页面正文区域紧凑 */
+.post-content {
+  padding-top: 0.25rem !important;
+}
+
+/* 子页面列表卡片间距优化 */
+.sheet-card {
+  margin: 0.6rem 0 !important;
+}
+
+/* 搜索框（纯输入框，无多余背景） ========== */
 .search-wrap {
   padding: 0.5rem 0 0.25rem;
   margin-bottom: 0.5rem;
@@ -227,4 +206,3 @@ pre, table {
   .post-content { font-size: 1rem; line-height: 1.75; }
   .sheet-card { padding: 0.875rem 1rem; }
 }
-/* （注：内容由AI生成） */

@@ -219,6 +219,8 @@ groups.forEach(function(gid) {
     animation: 150,
     delay: 200,
     touchStartThreshold: 5,
+    forceFallback: true,
+    fallbackOnBody: true,
     ghostClass: "sort-ghost",
     onEnd: function() {
       const order = Array.from(el.querySelectorAll('.grid-card')).map(function(c) { return c.dataset.id; });
