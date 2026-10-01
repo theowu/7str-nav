@@ -4,6 +4,26 @@ description: "AI生成的音乐作品"
 disableHeader: true
 ---
 
+
+<script>
+(function(){
+  var t = localStorage.getItem('theme');
+  if(t === 'dark'){
+    document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme','dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.setAttribute('data-theme','light');
+  }
+})();
+function toggleTheme() {
+  var h = document.documentElement;
+  var isDark = h.classList.contains('dark');
+  h.classList.toggle('dark', !isDark);
+  h.setAttribute('data-theme', !isDark ? 'dark' : 'light');
+  localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+}
+</script>
 <style>
 body { padding-top: 0 !important; }
 .main, .post, .page { padding-top: 0 !important; }
@@ -65,7 +85,7 @@ body { padding-top: 0 !important; }
 
 <div class="subpage-header-wrap">
   <div class="subpage-title">AIGC音乐</div>
-  <button class="subpage-theme-btn" onclick="var h=document.documentElement;var c=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',c);localStorage.setItem('theme',c)">☀</button>
+  <button class="subpage-theme-btn" onclick="toggleTheme()">☀</button>
   <div class="subpage-home-btn"><a href="/">🏠首页</a></div>
 </div>
 

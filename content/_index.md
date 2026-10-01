@@ -7,8 +7,11 @@ title: "七弦万事屋藏宝图"
 (function(){
   var t = localStorage.getItem('theme');
   if(t === 'dark'){
-    document.documentElement.setAttribute('data-theme','dark');
     document.documentElement.classList.add('dark');
+    document.documentElement.setAttribute('data-theme','dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    document.documentElement.setAttribute('data-theme','light');
   }
 })();
 </script>
@@ -197,11 +200,10 @@ header.site-header, #site-header, .header { display: none !important; }
 // 主题切换函数（全局，所有页面共享逻辑）
 function toggleTheme() {
   var h = document.documentElement;
-  var isDark = h.getAttribute('data-theme') === 'dark';
-  var newTheme = isDark ? 'light' : 'dark';
-  h.setAttribute('data-theme', newTheme);
+  var isDark = h.classList.contains('dark');
   h.classList.toggle('dark', !isDark);
-  localStorage.setItem('theme', newTheme);
+  h.setAttribute('data-theme', !isDark ? 'dark' : 'light');
+  localStorage.setItem('theme', !isDark ? 'dark' : 'light');
 }
 
 // 原生拖拽实现（touch + mouse统一用Pointer Events）
