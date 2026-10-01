@@ -1,0 +1,25 @@
+{{/* 首页搜索短代码
+   用法：{{< home-search >}}
+*/}}
+<div class="search-wrap">
+  <input id="home-search-input" type="text" placeholder="🔍 搜索栏目..." />
+</div>
+
+<script>
+(function() {
+  const input = document.getElementById('home-search-input');
+  if (!input) return;
+  input.addEventListener('input', function() {
+    const kw = this.value.trim().toLowerCase();
+    document.querySelectorAll('.grid-card').forEach(function(card) {
+      const text = card.textContent.toLowerCase();
+      const keywords = (card.dataset.keywords || '').toLowerCase();
+      if (text.includes(kw) || keywords.includes(kw)) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+})();
+</script>

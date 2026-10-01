@@ -1,0 +1,32 @@
+{{/* 页内搜索框短代码
+   用法：{{< inpage-search placeholder="输入歌名搜索..." listId="article-list" resultId="no-result" >}}
+*/}}
+{{ $placeholder := .Get "placeholder" | default "🔍 输入关键词搜索..." }}
+{{ $listId := .Get "listId" | default "article-list" }}
+{{ $resultId := .Get "resultId" | default "no-result" }}
+
+<div class="search-wrap">
+  <input id="search-input" type="text" placeholder="{{ $placeholder }}" />
+</div>
+
+<script>
+(function() {
+  const input = document.getElementById('search-input');
+  const list = document.getElementById('{{ $listId }}');
+  const noResult = document.getElementById('{{ $resultId }}');
+  if (!input || !list) return;
+  const cards = list.querySelectorAll('.sheet-card');
+  input.addEventListener('input', function() {
+    const kw = this.value.trim().toLowerCase();
+    let count = 0;
+    cards.forEach(function(c) {
+      const titleEl = c.querySelector('.sheet-title');
+      if (!titleEl) return;
+      const t = titleEl.textContent.toLowerCase();
+      if (t.includes(kw)) { c.style.display = ''; count++; }
+      else { c.style.display = 'none'; }
+    });
+    if (noResult) noResult.style.display = count === 0 ? '' : 'none';
+  });
+})();
+</script>
