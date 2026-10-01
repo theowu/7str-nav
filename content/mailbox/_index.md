@@ -6,21 +6,26 @@ disableHeader: true
 
 <style>
 .subpage-header-wrap {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  gap: 1rem;
   width: 100%;
-  margin: 0.4rem 0 0.8rem;
+  max-width: 1200px;
+  margin: 0.4rem auto 0.8rem;
+  flex-wrap: wrap;
+  padding: 0 8px;
+  box-sizing: border-box;
 }
 .subpage-title {
-  grid-column: 2;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  text-align: center;
 }
-.subpage-home-btn {
-  grid-column: 3;
-  justify-self: end;
+.subpage-theme-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
 }
 .subpage-home-btn a {
   font-size: 1.1rem;
@@ -29,6 +34,7 @@ disableHeader: true
 
 <div class="subpage-header-wrap">
   <div class="subpage-title">魔法信箱</div>
+  <button class="subpage-theme-btn" onclick="var h=document.documentElement;var c=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',c);localStorage.setItem('theme',c)">☀</button>
   <div class="subpage-home-btn"><a href="/">🏠首页</a></div>
 </div>
 

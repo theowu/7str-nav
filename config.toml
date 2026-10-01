@@ -1,6 +1,6 @@
 baseURL = "/"
 languageCode = "zh-cn"
-title = "我的创作导航站"
+title = "七弦万事屋地图"
 theme = "PaperMod"
 
 # 构建设置
@@ -27,8 +27,8 @@ buildExpired = false
   # 文章列表设置
   ShowReadingTime = false
   ShowWordCount = false
-  ShowBreadCrumbs = true
-  ShowPostNavLinks = true
+  ShowBreadCrumbs = false
+  ShowPostNavLinks = false
   ShowCodeCopyButtons = false
   disableAnchorCopy = true
 

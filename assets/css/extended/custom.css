@@ -17,18 +17,48 @@ pre, table {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ========== 彻底隐藏所有页面PaperMod原生顶部栏 ========== */
-header.site-header,
-#site-header,
-.header {
+/* ========== 隐藏PaperMod原生页面元素，但保留dark-mode-toggle按钮在DOM里 ========== */
+.breadcrumbs,
+.post-title,
+.entry-header,
+.single-title,
+.page-header,
+.page-title,
+.postmeta,
+.post-meta,
+.post-tags,
+#breadcrumbs,
+.terms-tags,
+.pagination,
+.header .logo,
+.site-header .logo,
+.header ul,
+.header .site-nav,
+#menu,
+#header-menu,
+#search,
+.search-button,
+.toggle.search,
+.headericons .search {
   display: none !important;
 }
 
-/* ========== 子页面标题居中紧凑 ========== */
-.post-title,
-.entry-header h1,
-.single-title {
-  display: none !important; /* 用自定义头部替代，隐藏Hugo自动生成的重复标题 */
+/* header移到屏幕外，不显示但保留DOM（让#dark-mode-toggle可用） */
+header.site-header,
+#site-header,
+.header {
+  position: absolute !important;
+  left: -9999px !important;
+  top: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+/* 隐藏主页底部的post导航 */
+.post-nav,
+.post-footer {
+  display: none !important;
 }
 
 /* ========== 视频容器 ========== */

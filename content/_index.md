@@ -1,5 +1,5 @@
 ---
-title: "七弦万事屋地图"
+title: "七弦万事屋藏宝图"
 ---
 
 <style>
@@ -10,18 +10,21 @@ header.site-header,
   display: none !important;
 }
 
-/* 头部容器：整行居中，紧凑间距 */
+/* 头部容器：整行居中，和grid对齐宽度 */
 .header-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   width: 100%;
-  margin: 0.4rem 0 0.8rem;
+  max-width: 1200px;
+  margin: 0.4rem auto 0.8rem;
   flex-wrap: wrap;
+  padding: 0 8px;
+  box-sizing: border-box;
 }
 .site-title-text {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 .theme-toggle-btn {
@@ -34,10 +37,13 @@ header.site-header,
   font-size: 1.1rem;
 }
 
-/* 板块容器 */
+/* 板块容器：和搜索框同宽对齐 */
 .section-block {
   margin: 1.2rem auto;
   text-align: center;
+  max-width: 1200px;
+  padding: 0 8px;
+  box-sizing: border-box;
 }
 .section-title {
   font-size: 1.1rem;
@@ -74,10 +80,13 @@ header.site-header,
 .grid-card-icon { font-size: 1.5rem; margin-bottom: 6px; margin-top: 4px; line-height: 1; }
 .grid-card-name { font-size: 0.85rem; text-align: center; white-space: nowrap; }
 
-/* 搜索框 */
+/* 搜索框：和grid对齐宽度 */
 .home-search-wrap {
-  max-width: 600px;
-  margin: 0 auto 1.2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0.4rem auto 1.2rem;
+  padding: 0 8px;
+  box-sizing: border-box;
 }
 #home-search-input {
   width: 100%;
@@ -118,8 +127,8 @@ header.site-header,
 </style>
 
 <div class="header-wrap">
-  <div class="site-title-text">七弦万事屋地图</div>
-  <button class="theme-toggle-btn" onclick="document.documentElement.classList.toggle('dark')">☀</button>
+  <div class="site-title-text">七弦万事屋藏宝图</div>
+  <button class="theme-toggle-btn" onclick="var h=document.documentElement;var c=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',c);localStorage.setItem('theme',c)">☀</button>
   <div class="home-link-btn"><a href="/">🏠首页</a></div>
 </div>
 
@@ -197,10 +206,18 @@ header.site-header,
   </div>
 </div>
 
-<p style="text-align:center; margin-top:2rem; opacity:0.6; font-size:0.85rem;">© 2026 七弦万事屋地图</p>
+<p style="text-align:center; margin-top:2rem; opacity:0.6; font-size:0.85rem;">© 2026 七弦万事屋藏宝图</p>
 
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
+function toggleTheme() {
+  const t = document.getElementById("dark-mode-toggle");
+  if (t) { t.click(); return; }
+  const html = document.documentElement;
+  html.classList.toggle("dark");
+  localStorage.setItem("theme", html.classList.contains("dark") ? "dark" : "light");
+}
+
 const groups = ["group-ent", "group-study", "group-tool"];
 groups.forEach(function(gid) {
   const el = document.getElementById(gid);
