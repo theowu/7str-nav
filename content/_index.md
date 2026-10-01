@@ -44,17 +44,17 @@ header.site-header,
   margin-bottom: 0.6rem;
 }
 
-/* 桌面端：固定卡片160px，自动居中 */
+/* 桌面端：一行固定5列，卡片自动伸缩填充 */
 .section-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 160px);
+  grid-template-columns: repeat(5, 1fr);
   justify-content: center;
   gap: 12px;
 }
 
 /* 卡片：修复文字溢出 */
 .grid-card {
-  width: 160px;
+  width: 100%;
   height: 90px;
   box-sizing: border-box;
   display: flex;
@@ -67,11 +67,12 @@ header.site-header,
   transition: all 0.15s ease;
   user-select: none;
   overflow: hidden;
+  padding-top: 8px;
 }
 .grid-card:active { cursor: grabbing; }
 .grid-card:hover { background: var(--border); }
-.grid-card-icon { font-size: 1.5rem; margin-bottom: 4px; line-height: 1; }
-.grid-card-name { font-size: 0.85rem; text-align: center; }
+.grid-card-icon { font-size: 1.5rem; margin-bottom: 6px; margin-top: 4px; line-height: 1; }
+.grid-card-name { font-size: 0.85rem; text-align: center; white-space: nowrap; }
 
 /* 搜索框 */
 .home-search-wrap {
@@ -111,8 +112,8 @@ header.site-header,
     height: 80px;
   }
   .site-title-text { font-size: 1.3rem; }
-  .grid-card-icon { font-size: 1.3rem; }
-  .grid-card-name { font-size: 0.72rem; }
+  .grid-card-icon { font-size: 1.2rem; margin-bottom: 5px; }
+  .grid-card-name { font-size: 0.65rem; white-space: nowrap; }
 }
 </style>
 
