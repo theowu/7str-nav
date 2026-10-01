@@ -128,19 +128,19 @@ header.site-header, #site-header, .header { display: none !important; }
 <div class="section-block">
   <div class="section-title">🎮 娱乐专栏</div>
   <div class="section-grid" id="group-ent">
-    <div class="grid-card" data-id="ent-music" data-keywords="AIGC音乐 ai音乐 音乐">
+    <div class="grid-card" data-id="ent-music" data-keywords="AIGC音乐 ai音乐 音乐" data-link="/aigc-music/">
       <div class="grid-card-icon">🤖</div>
       <div class="grid-card-name">AIGC音乐</div>
     </div>
-    <div class="grid-card" data-id="ent-video" data-keywords="AIGC视频 ai视频 视频">
+    <div class="grid-card" data-id="ent-video" data-keywords="AIGC视频 ai视频 视频" data-link="/aigc-video/">
       <div class="grid-card-icon">🎬</div>
       <div class="grid-card-name">AIGC视频</div>
     </div>
-    <div class="grid-card" data-id="ent-game" data-keywords="精品游戏 游戏">
+    <div class="grid-card" data-id="ent-game" data-keywords="精品游戏 游戏" data-link="/game/">
       <div class="grid-card-icon">🎮</div>
       <div class="grid-card-name">精品游戏</div>
     </div>
-    <div class="grid-card" data-id="ent-novel" data-keywords="连载小说 小说 故事">
+    <div class="grid-card" data-id="ent-novel" data-keywords="连载小说 小说 故事" data-link="/novel/">
       <div class="grid-card-icon">📖</div>
       <div class="grid-card-name">连载小说</div>
     </div>
@@ -150,23 +150,23 @@ header.site-header, #site-header, .header { display: none !important; }
 <div class="section-block">
   <div class="section-title">📚 学习空间</div>
   <div class="section-grid" id="group-study">
-    <div class="grid-card" data-id="study-tutorial" data-keywords="魔法教程 教程">
+    <div class="grid-card" data-id="study-tutorial" data-keywords="魔法教程 教程" data-link="/tutorial/">
       <div class="grid-card-icon">📝</div>
       <div class="grid-card-name">魔法教程</div>
     </div>
-    <div class="grid-card" data-id="study-fr" data-keywords="法语资讯 法语">
+    <div class="grid-card" data-id="study-fr" data-keywords="法语资讯 法语" data-link="/french/">
       <div class="grid-card-icon">🇫🇷</div>
       <div class="grid-card-name">法语资讯</div>
     </div>
-    <div class="grid-card" data-id="study-fin" data-keywords="财经故事 财经">
+    <div class="grid-card" data-id="study-fin" data-keywords="财经故事 财经" data-link="/finance/">
       <div class="grid-card-icon">💰</div>
       <div class="grid-card-name">财经故事</div>
     </div>
-    <div class="grid-card" data-id="study-think" data-keywords="认知提升 认知">
+    <div class="grid-card" data-id="study-think" data-keywords="认知提升 认知" data-link="/cognition/">
       <div class="grid-card-icon">🧠</div>
       <div class="grid-card-name">认知提升</div>
     </div>
-    <div class="grid-card" data-id="study-guitar" data-keywords="指弹吉他 吉他 曲谱">
+    <div class="grid-card" data-id="study-guitar" data-keywords="指弹吉他 吉他 曲谱" data-link="/guitar/">
       <div class="grid-card-icon">🎸</div>
       <div class="grid-card-name">指弹吉他</div>
     </div>
@@ -176,15 +176,15 @@ header.site-header, #site-header, .header { display: none !important; }
 <div class="section-block">
   <div class="section-title">🔧 魔法工具</div>
   <div class="section-grid" id="group-tool">
-    <div class="grid-card" data-id="tool-open" data-keywords="开源神器 开源 软件">
+    <div class="grid-card" data-id="tool-open" data-keywords="开源神器 开源 软件" data-link="/opensource/">
       <div class="grid-card-icon">🛠️</div>
       <div class="grid-card-name">开源神器</div>
     </div>
-    <div class="grid-card" data-id="tool-self" data-keywords="自制神器 自制">
+    <div class="grid-card" data-id="tool-self" data-keywords="自制神器 自制" data-link="/homemade/">
       <div class="grid-card-icon">🔨</div>
       <div class="grid-card-name">自制神器</div>
     </div>
-    <div class="grid-card" data-id="tool-mail" data-keywords="魔法信箱 信箱">
+    <div class="grid-card" data-id="tool-mail" data-keywords="魔法信箱 信箱" data-link="/mailbox/">
       <div class="grid-card-icon">📮</div>
       <div class="grid-card-name">魔法信箱</div>
     </div>
@@ -260,7 +260,7 @@ function setupDrag(el, storageKey) {
     dragEl = null;
     ghost = null;
     moved = false;
-    return wasMoved;
+    return { wasMoved: wasMoved, card: card };
   }
 
   el.addEventListener('pointerdown', function(e) {
@@ -277,17 +277,20 @@ function setupDrag(el, storageKey) {
         createGhost(dragEl);
         if (e.cancelable) e.preventDefault();
       }, 200);
-    } else {
-      // PC端直接开始拖拽，不需要长按
-      createGhost(card);
-      moved = true;
     }
+    // PC端不立即创建ghost，等pointermove移动后才创建
   });
 
   el.addEventListener('pointermove', function(e) {
     if (!dragEl) return;
     var dx = e.clientX - startX;
     var dy = e.clientY - startY;
+
+    // PC端：移动超过5px后创建ghost开始拖拽
+    if (!ghost && !isTouch && (Math.abs(dx) > 5 || Math.abs(dy) > 5)) {
+      createGhost(dragEl);
+      moved = true;
+    }
 
     if (!ghost && Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
 
@@ -304,11 +307,10 @@ function setupDrag(el, storageKey) {
   });
 
   el.addEventListener('pointerup', function(e) {
-    var wasMoved = endDrag();
-    if (!wasMoved && dragEl) {
-      var onclick = dragEl.getAttribute('onclick') || '';
-      var match = onclick.match(/location\.href='([^']+)'/);
-      if (match) location.href = match[1];
+    var result = endDrag();
+    if (!result.wasMoved && result.card) {
+      var link = result.card.getAttribute('data-link');
+      if (link) location.href = link;
     }
   });
 
