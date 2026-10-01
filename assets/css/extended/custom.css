@@ -17,43 +17,59 @@ pre, table {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ========== 头部居中 ========== */
-.site-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 1rem 0 0.5rem;
-}
-.site-header .site-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-.site-header .site-nav,
-#menu {
+/* ========== 头部强制居中（覆盖PaperMod） ========== */
+.header,
+.site-header,
+#site-header {
   display: flex !important;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
 }
-.site-header .site-nav a,
-#menu a {
-  margin: 0 0.25rem;
+.header .logo,
+.site-header .site-title,
+#site-header .logo {
+  font-size: 1.3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+  text-align: center !important;
 }
+.header ul,
+.header .site-nav,
+#menu,
+#header-menu {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  padding: 0 !important;
+  margin: 0.25rem 0 !important;
+  list-style: none !important;
+}
+.header ul li,
+.header .site-nav li,
+#menu li {
+  margin: 0 0.35rem !important;
+  display: inline-block !important;
+}
+/* 主题切换按钮居中 */
 #dark-mode-toggle,
-.theme-toggle {
-  margin: 0.5rem auto 0;
-  display: block;
+.header .theme-toggle,
+.headericons {
+  margin: 0.5rem auto 0 !important;
+  display: block !important;
+  text-align: center !important;
 }
-/* 隐藏PaperMod自带搜索框 */
+/* 隐藏PaperMod自带搜索 */
 #search,
 .search-button,
-.toggle.search {
+.toggle.search,
+.headericons .search {
   display: none !important;
 }
 .breadcrumbs {
-  display: none;
+  display: none !important;
 }
 
 /* ========== 视频容器 ========== */
@@ -100,7 +116,7 @@ pre, table {
   color: var(--secondary);
 }
 
-/* ========== 首页 Grid（统一卡片尺寸） ========== */
+/* ========== 首页 Grid（固定卡片尺寸，所有板块完全一致） ========== */
 .category-section {
   margin: 1.5rem 0 0.5rem;
 }
@@ -110,15 +126,15 @@ pre, table {
   text-align: center;
 }
 
-/* 关键：所有grid-row用auto-fit+固定卡片宽度，卡片大小永远一致 */
+/* 关键：固定卡片宽度，不拉伸，所有板块卡片大小完全一样 */
 .grid-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, 105px);
   gap: 10px;
   justify-content: center;
 }
 
-/* 所有卡片统一固定尺寸，不随列数变化 */
+/* 卡片固定尺寸，不随列数变化 */
 .grid-card {
   display: flex;
   flex-direction: column;
@@ -127,12 +143,14 @@ pre, table {
   text-align: center;
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 0.75rem 0.5rem;
+  padding: 0.75rem 0.25rem;
   text-decoration: none !important;
   color: inherit !important;
   background: var(--entry);
   transition: box-shadow 0.2s, transform 0.15s;
-  height: 80px;
+  width: 105px;
+  height: 85px;
+  box-sizing: border-box;
 }
 .grid-card:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
@@ -144,7 +162,7 @@ pre, table {
   line-height: 1;
 }
 .grid-card .grid-label {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 500;
   line-height: 1.3;
 }
@@ -209,3 +227,4 @@ pre, table {
   .post-content { font-size: 1rem; line-height: 1.75; }
   .sheet-card { padding: 0.875rem 1rem; }
 }
+/* （注：内容由AI生成） */
