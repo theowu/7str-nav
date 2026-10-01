@@ -2,6 +2,17 @@
 title: "七弦万事屋藏宝图"
 ---
 
+<script>
+// 页面加载前立即读取主题，避免闪烁
+(function(){
+  var t = localStorage.getItem('theme');
+  if(t === 'dark'){
+    document.documentElement.setAttribute('data-theme','dark');
+    document.documentElement.classList.add('dark');
+  }
+})();
+</script>
+
 <style>
 body { padding-top: 0 !important; }
 .main, .post, .page { padding-top: 0 !important; }
@@ -37,7 +48,6 @@ header.site-header, #site-header, .header { display: none !important; }
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
-  touch-action: none;
 }
 
 .grid-card {
@@ -54,13 +64,24 @@ header.site-header, #site-header, .header { display: none !important; }
   transition: all 0.15s ease;
   user-select: none;
   overflow: hidden;
-  touch-action: none;
   padding-top: 6px;
+  touch-action: none;
 }
 .grid-card:active { cursor: grabbing; }
 .grid-card:hover { background: var(--border); }
+.grid-card.dragging { opacity: 0.5; }
 .grid-card-icon { font-size: 1.4rem; margin-bottom: 3px; line-height: 1; }
 .grid-card-name { font-size: 0.85rem; text-align: center; white-space: nowrap; }
+
+.drag-ghost {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.9;
+  transform: rotate(3deg);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  border-radius: 14px;
+}
 
 .home-search-wrap {
   width: 100%;
@@ -95,7 +116,7 @@ header.site-header, #site-header, .header { display: none !important; }
 
 <div class="header-wrap">
   <div class="site-title-text">七弦万事屋藏宝图</div>
-  <button class="theme-toggle-btn" onclick="var h=document.documentElement;var c=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',c);localStorage.setItem('theme',c)">☀</button>
+  <button class="theme-toggle-btn" onclick="toggleTheme()">☀</button>
   <div class="home-link-btn"><a href="/">🏠首页</a></div>
 </div>
 
@@ -107,19 +128,19 @@ header.site-header, #site-header, .header { display: none !important; }
 <div class="section-block">
   <div class="section-title">🎮 娱乐专栏</div>
   <div class="section-grid" id="group-ent">
-    <div class="grid-card" data-id="ent-music" data-keywords="AIGC音乐 ai音乐 音乐" onclick="location.href='/aigc-music/'">
+    <div class="grid-card" data-id="ent-music" data-keywords="AIGC音乐 ai音乐 音乐">
       <div class="grid-card-icon">🤖</div>
       <div class="grid-card-name">AIGC音乐</div>
     </div>
-    <div class="grid-card" data-id="ent-video" data-keywords="AIGC视频 ai视频 视频" onclick="location.href='/aigc-video/'">
+    <div class="grid-card" data-id="ent-video" data-keywords="AIGC视频 ai视频 视频">
       <div class="grid-card-icon">🎬</div>
       <div class="grid-card-name">AIGC视频</div>
     </div>
-    <div class="grid-card" data-id="ent-game" data-keywords="精品游戏 游戏" onclick="location.href='/game/'">
+    <div class="grid-card" data-id="ent-game" data-keywords="精品游戏 游戏">
       <div class="grid-card-icon">🎮</div>
       <div class="grid-card-name">精品游戏</div>
     </div>
-    <div class="grid-card" data-id="ent-novel" data-keywords="连载小说 小说 故事" onclick="location.href='/novel/'">
+    <div class="grid-card" data-id="ent-novel" data-keywords="连载小说 小说 故事">
       <div class="grid-card-icon">📖</div>
       <div class="grid-card-name">连载小说</div>
     </div>
@@ -129,23 +150,23 @@ header.site-header, #site-header, .header { display: none !important; }
 <div class="section-block">
   <div class="section-title">📚 学习空间</div>
   <div class="section-grid" id="group-study">
-    <div class="grid-card" data-id="study-tutorial" data-keywords="魔法教程 教程" onclick="location.href='/tutorial/'">
+    <div class="grid-card" data-id="study-tutorial" data-keywords="魔法教程 教程">
       <div class="grid-card-icon">📝</div>
       <div class="grid-card-name">魔法教程</div>
     </div>
-    <div class="grid-card" data-id="study-fr" data-keywords="法语资讯 法语" onclick="location.href='/french/'">
+    <div class="grid-card" data-id="study-fr" data-keywords="法语资讯 法语">
       <div class="grid-card-icon">🇫🇷</div>
       <div class="grid-card-name">法语资讯</div>
     </div>
-    <div class="grid-card" data-id="study-fin" data-keywords="财经故事 财经" onclick="location.href='/finance/'">
+    <div class="grid-card" data-id="study-fin" data-keywords="财经故事 财经">
       <div class="grid-card-icon">💰</div>
       <div class="grid-card-name">财经故事</div>
     </div>
-    <div class="grid-card" data-id="study-think" data-keywords="认知提升 认知" onclick="location.href='/cognition/'">
+    <div class="grid-card" data-id="study-think" data-keywords="认知提升 认知">
       <div class="grid-card-icon">🧠</div>
       <div class="grid-card-name">认知提升</div>
     </div>
-    <div class="grid-card" data-id="study-guitar" data-keywords="指弹吉他 吉他 曲谱" onclick="location.href='/guitar/'">
+    <div class="grid-card" data-id="study-guitar" data-keywords="指弹吉他 吉他 曲谱">
       <div class="grid-card-icon">🎸</div>
       <div class="grid-card-name">指弹吉他</div>
     </div>
@@ -155,15 +176,15 @@ header.site-header, #site-header, .header { display: none !important; }
 <div class="section-block">
   <div class="section-title">🔧 魔法工具</div>
   <div class="section-grid" id="group-tool">
-    <div class="grid-card" data-id="tool-open" data-keywords="开源神器 开源 软件" onclick="location.href='/opensource/'">
+    <div class="grid-card" data-id="tool-open" data-keywords="开源神器 开源 软件">
       <div class="grid-card-icon">🛠️</div>
       <div class="grid-card-name">开源神器</div>
     </div>
-    <div class="grid-card" data-id="tool-self" data-keywords="自制神器 自制" onclick="location.href='/homemade/'">
+    <div class="grid-card" data-id="tool-self" data-keywords="自制神器 自制">
       <div class="grid-card-icon">🔨</div>
       <div class="grid-card-name">自制神器</div>
     </div>
-    <div class="grid-card" data-id="tool-mail" data-keywords="魔法信箱 信箱" onclick="location.href='/mailbox/'">
+    <div class="grid-card" data-id="tool-mail" data-keywords="魔法信箱 信箱">
       <div class="grid-card-icon">📮</div>
       <div class="grid-card-name">魔法信箱</div>
     </div>
@@ -172,45 +193,145 @@ header.site-header, #site-header, .header { display: none !important; }
 
 <p style="text-align:center; margin-top:0.8rem; opacity:0.5; font-size:0.78rem;">© 2026 七弦万事屋藏宝图</p>
 
-<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
-const groups = ["group-ent", "group-study", "group-tool"];
-groups.forEach(function(gid) {
-  const el = document.getElementById(gid);
-  const storageKey = "sort_" + gid;
-  const savedOrder = localStorage.getItem(storageKey);
-  if (savedOrder) {
-    const ids = JSON.parse(savedOrder);
-    const frag = document.createDocumentFragment();
+// 主题切换函数（全局，所有页面共享逻辑）
+function toggleTheme() {
+  var h = document.documentElement;
+  var isDark = h.getAttribute('data-theme') === 'dark';
+  var newTheme = isDark ? 'light' : 'dark';
+  h.setAttribute('data-theme', newTheme);
+  h.classList.toggle('dark', !isDark);
+  localStorage.setItem('theme', newTheme);
+}
+
+// 原生拖拽实现（touch + mouse统一用Pointer Events）
+function setupDrag(el, storageKey) {
+  var dragEl = null, ghost = null, startX = 0, startY = 0, moved = false, longPressTimer = null, isTouch = false;
+
+  // 恢复保存的顺序
+  var saved = localStorage.getItem(storageKey);
+  if (saved) {
+    var ids = JSON.parse(saved);
+    var frag = document.createDocumentFragment();
     ids.forEach(function(id) {
-      const item = el.querySelector('[data-id="' + id + '"]');
+      var item = el.querySelector('[data-id="' + id + '"]');
       if (item) frag.appendChild(item);
     });
     el.appendChild(frag);
   }
-  new Sortable(el, {
-    animation: 200,
-    delay: 150,
-    touchStartThreshold: 5,
-    ghostClass: "sort-ghost",
-    onEnd: function() {
-      const order = Array.from(el.querySelectorAll('.grid-card')).map(function(c) { return c.dataset.id; });
+
+  function createGhost(card) {
+    var rect = card.getBoundingClientRect();
+    ghost = card.cloneNode(true);
+    ghost.className = 'grid-card drag-ghost';
+    ghost.style.width = rect.width + 'px';
+    ghost.style.height = rect.height + 'px';
+    ghost.style.left = rect.left + 'px';
+    ghost.style.top = rect.top + 'px';
+    document.body.appendChild(ghost);
+    card.classList.add('dragging');
+  }
+
+  function moveGhost(x, y) {
+    if (!ghost) return;
+    ghost.style.left = (x - ghost.offsetWidth / 2) + 'px';
+    ghost.style.top = (y - ghost.offsetHeight / 2) + 'px';
+    var under = document.elementFromPoint(x, y);
+    var underCard = under ? under.closest('.grid-card') : null;
+    if (underCard && underCard !== dragEl && !underCard.classList.contains('dragging')) {
+      var rect = underCard.getBoundingClientRect();
+      var cx = rect.left + rect.width / 2;
+      if (x < cx) el.insertBefore(dragEl, underCard);
+      else el.insertBefore(dragEl, underCard.nextSibling);
+    }
+  }
+
+  function endDrag() {
+    clearTimeout(longPressTimer);
+    if (ghost) {
+      ghost.remove();
+      ghost = null;
+      dragEl.classList.remove('dragging');
+      var order = Array.from(el.querySelectorAll('.grid-card')).map(function(c) { return c.dataset.id; });
       localStorage.setItem(storageKey, JSON.stringify(order));
     }
-  });
-});
+    var wasMoved = moved;
+    var card = dragEl;
+    dragEl = null;
+    ghost = null;
+    moved = false;
+    return wasMoved;
+  }
 
-const searchInput = document.getElementById("home-search-input");
-const noResult = document.getElementById("no-result");
+  el.addEventListener('pointerdown', function(e) {
+    var card = e.target.closest('.grid-card');
+    if (!card) return;
+    isTouch = (e.pointerType === 'touch');
+    startX = e.clientX;
+    startY = e.clientY;
+    moved = false;
+    dragEl = card;
+
+    if (isTouch) {
+      longPressTimer = setTimeout(function() {
+        createGhost(dragEl);
+        if (e.cancelable) e.preventDefault();
+      }, 200);
+    } else {
+      // PC端直接开始拖拽，不需要长按
+      createGhost(card);
+      moved = true;
+    }
+  });
+
+  el.addEventListener('pointermove', function(e) {
+    if (!dragEl) return;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+
+    if (!ghost && Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+
+    if (isTouch && !ghost) {
+      clearTimeout(longPressTimer);
+      return;
+    }
+
+    if (ghost) {
+      moved = true;
+      moveGhost(e.clientX, e.clientY);
+      if (e.cancelable) e.preventDefault();
+    }
+  });
+
+  el.addEventListener('pointerup', function(e) {
+    var wasMoved = endDrag();
+    if (!wasMoved && dragEl) {
+      var onclick = dragEl.getAttribute('onclick') || '';
+      var match = onclick.match(/location\.href='([^']+)'/);
+      if (match) location.href = match[1];
+    }
+  });
+
+  el.addEventListener('pointercancel', function() { endDrag(); });
+}
+
+// 初始化三个分组
+setupDrag(document.getElementById('group-ent'), 'sort_group-ent');
+setupDrag(document.getElementById('group-study'), 'sort_group-study');
+setupDrag(document.getElementById('group-tool'), 'sort_group-tool');
+
+// 搜索
+var searchInput = document.getElementById('home-search-input');
+var noResult = document.getElementById('no-result');
 searchInput.oninput = function() {
-  const kw = this.value.trim().toLowerCase();
-  let hasAny = false;
+  var kw = this.value.trim().toLowerCase();
+  var hasAny = false;
   document.querySelectorAll('.grid-card').forEach(function(card) {
-    const keys = card.dataset.keywords.toLowerCase();
-    const match = keys.includes(kw);
-    card.style.display = kw ? (match ? "flex" : "none") : "flex";
+    var keys = card.dataset.keywords.toLowerCase();
+    var match = keys.includes(kw);
+    card.style.display = kw ? (match ? 'flex' : 'none') : 'flex';
     if (match) hasAny = true;
   });
-  noResult.style.display = (kw && !hasAny) ? "block" : "none";
+  noResult.style.display = (kw && !hasAny) ? 'block' : 'none';
 };
 </script>
