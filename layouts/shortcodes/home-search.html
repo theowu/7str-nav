@@ -1,25 +1,66 @@
-{{/* 首页搜索短代码
+{{/* 首页搜索 + 拖拽排序短代码
    用法：{{< home-search >}}
 */}}
 <div class="search-wrap">
-  <input id="home-search-input" type="text" placeholder="🔍 搜索栏目..." />
+  <input id="home-search-input" type="text" placeholder="🔍 搜索栏目，长按拖拽可排序" />
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
+  // 搜索功能
   const input = document.getElementById('home-search-input');
-  if (!input) return;
-  input.addEventListener('input', function() {
-    const kw = this.value.trim().toLowerCase();
-    document.querySelectorAll('.grid-card').forEach(function(card) {
-      const text = card.textContent.toLowerCase();
-      const keywords = (card.dataset.keywords || '').toLowerCase();
-      if (text.includes(kw) || keywords.includes(kw)) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
+  if (input) {
+    input.addEventListener('input', function() {
+      const kw = this.value.trim().toLowerCase();
+      document.querySelectorAll('.grid-card').forEach(function(card) {
+        const text = card.textContent.toLowerCase();
+        const keywords = (card.dataset.keywords || '').toLowerCase();
+        if (text.includes(kw) || keywords.includes(kw)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // 拖拽排序：每个 grid-row 独立排序
+  document.querySelectorAll('.grid-row').forEach(function(row) {
+    const rowId = row.dataset.rowId || 'default';
+    const storageKey = 'grid-order-' + rowId;
+
+    // 从 localStorage 恢复顺序
+    try {
+      const savedOrder = JSON.parse(localStorage.getItem(storageKey) || '[]');
+      if (savedOrder.length > 0) {
+        const cards = {};
+        row.querySelectorAll('.grid-card').forEach(function(card) {
+          cards[card.dataset.id] = card;
+        });
+        savedOrder.forEach(function(id) {
+          if (cards[id]) row.appendChild(cards[id]);
+        });
+      }
+    } catch(e) {}
+
+    // 初始化 SortableJS
+    Sortable.create(row, {
+      animation: 150,
+      ghostClass: 'dragging-ghost',
+      chosenClass: 'dragging-chosen',
+      dragClass: 'dragging',
+      delay: 200,       // 长按200ms才触发拖拽，避免误触
+      touchStartThreshold: 5,
+      onEnd: function() {
+        // 保存新顺序到 localStorage
+        const order = [];
+        row.querySelectorAll('.grid-card').forEach(function(card) {
+          if (card.dataset.id) order.push(card.dataset.id);
+        });
+        localStorage.setItem(storageKey, JSON.stringify(order));
       }
     });
   });
-})();
+});
 </script>

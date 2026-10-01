@@ -21,8 +21,8 @@ buildExpired = false
   copyright = "© 2026"
   githubRepo = ""
 
-  # 搜索
-  enableSearch = true
+  # 关闭PaperMod自带搜索（用我们自己的搜索框）
+  enableSearch = false
 
   # 文章列表设置
   ShowReadingTime = false

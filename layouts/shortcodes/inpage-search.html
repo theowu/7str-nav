@@ -10,7 +10,7 @@
 </div>
 
 <script>
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   const input = document.getElementById('search-input');
   const list = document.getElementById('{{ $listId }}');
   const noResult = document.getElementById('{{ $resultId }}');
@@ -28,5 +28,5 @@
     });
     if (noResult) noResult.style.display = count === 0 ? '' : 'none';
   });
-})();
+});
 </script>
