@@ -37,6 +37,7 @@ header.site-header, #site-header, .header { display: none !important; }
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
+  touch-action: none;
 }
 
 .grid-card {
@@ -189,12 +190,8 @@ groups.forEach(function(gid) {
   }
   new Sortable(el, {
     animation: 200,
-    delay: 250,
-    touchStartThreshold: 3,
-    forceFallback: true,
-    fallbackTolerance: 3,
-    preventOnFilter: false,
-    fallbackOnBody: true,
+    delay: 150,
+    touchStartThreshold: 5,
     ghostClass: "sort-ghost",
     onEnd: function() {
       const order = Array.from(el.querySelectorAll('.grid-card')).map(function(c) { return c.dataset.id; });
