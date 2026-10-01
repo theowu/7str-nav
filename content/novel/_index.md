@@ -5,6 +5,9 @@ disableHeader: true
 ---
 
 <style>
+body { padding-top: 0 !important; }
+.main, .post, .page { padding-top: 0 !important; }
+
 .subpage-header-wrap {
   display: flex;
   justify-content: center;
@@ -12,23 +15,51 @@ disableHeader: true
   gap: 1rem;
   width: 100%;
   max-width: 1200px;
-  margin: 0.4rem auto 0.8rem;
+  margin: 0.2rem auto 0.5rem;
   flex-wrap: wrap;
   padding: 0 8px;
   box-sizing: border-box;
 }
-.subpage-title {
-  font-size: 1.8rem;
-  font-weight: bold;
+.subpage-title { font-size: 1.8rem; font-weight: bold; }
+.subpage-theme-btn { background: transparent; border: none; font-size: 1.3rem; cursor: pointer; }
+.subpage-home-btn a { font-size: 1.1rem; }
+
+.sub-search-wrap {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0.3rem auto 0.6rem;
+  padding: 0 8px;
+  box-sizing: border-box;
 }
-.subpage-theme-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.3rem;
-  cursor: pointer;
+.sub-search-wrap input {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--tertiary);
+  color: var(--primary);
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
 }
-.subpage-home-btn a {
-  font-size: 1.1rem;
+
+.search-wrap {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin: 0.3rem auto 0.6rem !important;
+  padding: 0 8px !important;
+  box-sizing: border-box !important;
+}
+.search-wrap input {
+  width: 100% !important;
+  padding: 10px 16px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid var(--border) !important;
+  background: var(--tertiary) !important;
+  color: var(--primary) !important;
+  font-size: 1rem !important;
+  outline: none !important;
+  box-sizing: border-box !important;
 }
 </style>
 
