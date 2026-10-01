@@ -3,7 +3,6 @@ languageCode = "zh-cn"
 title = "我的创作导航站"
 theme = "PaperMod"
 
-# 构建设置
 enableRobotsTXT = true
 buildDrafts = false
 buildFuture = false
@@ -19,24 +18,17 @@ buildExpired = false
   description = "AIGC | 指弹吉他 | 法语 | 小说 | 游戏 | 开源工具"
   keywords = ["AIGC", "指弹", "法语", "小说", "开源工具"]
   copyright = "© 2026"
-  githubRepo = ""
 
-  # 搜索
   enableSearch = true
-
-  # 文章列表设置
   ShowReadingTime = false
   ShowWordCount = false
   ShowBreadCrumbs = true
   ShowPostNavLinks = true
   ShowCodeCopyButtons = false
   disableAnchorCopy = true
-
-  # 字体
   fontSize = "1rem"
   hideFooterWhenScrolling = true
 
-# 顶部菜单导航（按你的公众号一级菜单分3组）
 [menu]
   [[menu.main]]
     name = "🏠 首页"
@@ -52,8 +44,8 @@ buildExpired = false
     weight = 3
   [[menu.main]]
     name = "🔧 魔法工具"
-    url = "/tools/"
+    url = "/toolzone/"
     weight = 4
 
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
