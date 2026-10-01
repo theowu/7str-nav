@@ -6,7 +6,7 @@ title: "首页"
 
 <div class="category-section">
   <h2>🎮 娱乐专栏</h2>
-  <div class="grid-row grid-4" data-row-id="entertainment">
+  <div class="grid-row" data-row-id="entertainment">
     <a class="grid-card" href="/aigc-music/" data-id="aigc-music" data-keywords="AI 音乐 歌曲 aigc">
       <div class="grid-icon">🤖</div>
       <div class="grid-label">AIGC音乐</div>
@@ -28,7 +28,7 @@ title: "首页"
 
 <div class="category-section">
   <h2>📚 学习空间</h2>
-  <div class="grid-row grid-5" data-row-id="study">
+  <div class="grid-row" data-row-id="study">
     <a class="grid-card" href="/tutorial/" data-id="tutorial" data-keywords="教程 教学 魔法 tutorial">
       <div class="grid-icon">📝</div>
       <div class="grid-label">魔法教程</div>
@@ -54,7 +54,7 @@ title: "首页"
 
 <div class="category-section">
   <h2>🔧 魔法工具</h2>
-  <div class="grid-row grid-3" data-row-id="tools">
+  <div class="grid-row" data-row-id="tools">
     <a class="grid-card" href="/opensource/" data-id="opensource" data-keywords="开源 软件 工具">
       <div class="grid-icon">🛠️</div>
       <div class="grid-label">开源神器</div>

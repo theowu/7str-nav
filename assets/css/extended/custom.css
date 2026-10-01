@@ -17,8 +17,7 @@ pre, table {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ========== 居中布局（移动端优先） ========== */
-/* 站点标题居中 */
+/* ========== 头部居中 ========== */
 .site-header {
   display: flex;
   flex-direction: column;
@@ -31,7 +30,6 @@ pre, table {
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
-/* 顶部导航居中 */
 .site-header .site-nav,
 #menu {
   display: flex !important;
@@ -43,19 +41,17 @@ pre, table {
 #menu a {
   margin: 0 0.25rem;
 }
-/* 主题切换按钮居中 */
 #dark-mode-toggle,
 .theme-toggle {
   margin: 0.5rem auto 0;
   display: block;
 }
-/* 隐藏PaperMod自带搜索框（锐角矩形来源） */
+/* 隐藏PaperMod自带搜索框 */
 #search,
 .search-button,
 .toggle.search {
   display: none !important;
 }
-/* 隐藏面包屑导航（不需要） */
 .breadcrumbs {
   display: none;
 }
@@ -103,16 +99,8 @@ pre, table {
   font-size: 0.82rem;
   color: var(--secondary);
 }
-.sheet-card .sheet-difficulty {
-  display: inline-block;
-  background: var(--tertiary);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 0.78rem;
-  margin-right: 8px;
-}
 
-/* ========== 首页 Grid 卡片（等高统一规格） ========== */
+/* ========== 首页 Grid（统一卡片尺寸） ========== */
 .category-section {
   margin: 1.5rem 0 0.5rem;
 }
@@ -122,15 +110,15 @@ pre, table {
   text-align: center;
 }
 
+/* 关键：所有grid-row用auto-fit+固定卡片宽度，卡片大小永远一致 */
 .grid-row {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 10px;
-  margin-bottom: 0.5rem;
+  justify-content: center;
 }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
-.grid-5 { grid-template-columns: repeat(5, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
 
+/* 所有卡片统一固定尺寸，不随列数变化 */
 .grid-card {
   display: flex;
   flex-direction: column;
@@ -139,39 +127,29 @@ pre, table {
   text-align: center;
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 1rem 0.5rem;
+  padding: 0.75rem 0.5rem;
   text-decoration: none !important;
   color: inherit !important;
   background: var(--entry);
   transition: box-shadow 0.2s, transform 0.15s;
-  height: 90px;
+  height: 80px;
 }
 .grid-card:hover {
   box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   transform: translateY(-2px);
 }
 .grid-card .grid-icon {
-  font-size: 1.5rem;
-  margin-bottom: 6px;
+  font-size: 1.4rem;
+  margin-bottom: 4px;
   line-height: 1;
 }
 .grid-card .grid-label {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 500;
   line-height: 1.3;
 }
 
-/* 手机端：grid卡片改为2列 */
-@media (max-width: 600px) {
-  .grid-4, .grid-5, .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .grid-card {
-    height: 85px;
-  }
-}
-
-/* ========== 搜索框（纯输入框，无多余背景条） ========== */
+/* ========== 搜索框（纯输入框，无多余背景） ========== */
 .search-wrap {
   padding: 0.5rem 0 0.25rem;
   margin-bottom: 0.5rem;
@@ -221,34 +199,13 @@ pre, table {
   margin-bottom: 0.5rem;
 }
 
-/* 难度标签 */
-.tag-difficulty {
-  display: inline-block;
-  font-size: 0.78rem;
-  padding: 2px 8px;
-  border-radius: 4px;
-  margin-left: 8px;
-  vertical-align: middle;
-}
-.tag-easy { background: #e8f5e9; color: #2e7d32; }
-.tag-medium { background: #fff3e0; color: #e65100; }
-.tag-hard { background: #ffebee; color: #c62828; }
+/* ========== 拖拽视觉效果 ========== */
+.grid-card.dragging-chosen { opacity: 0.8; }
+.grid-card.dragging-ghost { opacity: 0.4; border-style: dashed; }
+.grid-card.dragging { box-shadow: 0 8px 24px rgba(0,0,0,0.15); z-index: 100; }
 
 /* 手机端字体 */
 @media (max-width: 768px) {
   .post-content { font-size: 1rem; line-height: 1.75; }
   .sheet-card { padding: 0.875rem 1rem; }
-}
-
-/* ========== 拖拽排序视觉效果 ========== */
-.grid-card.dragging-chosen {
-  opacity: 0.8;
-}
-.grid-card.dragging-ghost {
-  opacity: 0.4;
-  border-style: dashed;
-}
-.grid-card.dragging {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  z-index: 100;
 }
